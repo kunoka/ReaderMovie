@@ -1,0 +1,43 @@
+<view>
+  <swiper indicator-dots="true" autoplay='true' interval='5000' indicator-color="rgba(255,255,255,1)" indicator-active-color="rgba(255,255,0,1)" vertical='{{false}}'>
+    <swiper-item>
+      <image src="/images/wx.png"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/images/vr.png"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/images/iqiyi.png"></image>
+    </swiper-item>
+  </swiper>
+  <view class='post-container'>
+    <view class='post-author-date'>
+      <image wx:if="{{img_condition}}" class='post-author' src="{{img.author_img}}"></image>
+      <text class='post-date'>{{date}}</text>
+    </view>
+    <text class='post-title'>{{title}}</text>
+    <image class='post-image' src="{{img.post_img}}"></image>
+    <text class='post-content'>{{content}}</text>
+    <view class='post-like'>
+      <image class='post-like-image' src="../../images/icon/chat.png"></image>
+      <text class='post-like-font'>{{collect_num}}</text>
+      <image class='post-like-image' src="../../images/icon/view.png"></image>
+      <text class='post-like-font'>{{view_num}}</text>
+    </view>
+  </view>
+  <view class='post-container'>
+    <view class='post-author-date'>
+      <image class='post-author' src="/images/avatar/2.png"></image>
+      <text class='post-date'>Now 25 2016</text>
+    </view>
+    <text class='post-title'>比利-林恩的中场故事</text>
+    <image class='post-image' src="/images/post/bl.png"></image>
+    <text class='post-content'>言归正传,比利又是李安的一部正片，全程无尿点，故事不紧张，却紧凑有节奏，给8.2分。</text>
+    <view class='post-like'>
+      <image class='post-like-image' src="../../images/icon/chat.png"></image>
+      <text class='post-like-font'>96</text>
+      <image class='post-like-image' src="../../images/icon/view.png"></image>
+      <text class='post-like-font'>112</text>
+    </view>
+  </view>
+</view>
