@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+# Exclude IDE project folders
+# OS files
+.DS_STORE
+workspace.xml
+.idea
+#build/
+dist/
+.npmrc

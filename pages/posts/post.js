@@ -4,47 +4,95 @@ Page({
    * 页面的初始数据
    */
   data: {
- 
+    posts_key:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var post_content = {
-      date: "Sep 18 2016",
+    var posts_content = [{
+      date: "Sep 8 2016",
       title: "正是虾肥蟹壮时",
-      img:{
-        post_img: "/images/post/crab.png",
-        author_img: "/images/avatar/1.png"
-      },
+      post_img: "/images/post/bl.png",
+      author_img: "/images/avatar/1.png",
       img_condition: true,
       content: "菊黄蟹正肥，品尝秋之味。徐志摩把,“看初花的荻芦”和“到楼外楼吃蟹”,并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，",
       view_num: "122",
       collect_num: "96"
-    }
-    this.setData(post_content);
+    },
+      {
+        date: "Sep 18 2016",
+        title: "正是虾肥蟹壮时",
+        post_img: "/images/post/cat.png",
+        author_img: "/images/avatar/2.png",
+        img_condition: true,
+        content: "菊黄蟹正肥，品尝秋之味。徐志摩把,“看初花的荻芦”和“到楼外楼吃蟹”,并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，",
+        view_num: "122",
+        collect_num: "96"
+      },
+      {
+        date: "Sep 28 2016",
+        title: "正是虾肥蟹壮时",
+        post_img: "/images/post/crab.png",
+        author_img: "/images/avatar/3.png",
+        img_condition: true,
+        content: "菊黄蟹正肥，品尝秋之味。徐志摩把,“看初花的荻芦”和“到楼外楼吃蟹”,并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，",
+        view_num: "122",
+        collect_num: "96"
+      },
+      {
+        date: "Sep 18 2016",
+        title: "正是虾肥蟹壮时",
+        post_img: "/images/post/vr.png",
+        author_img: "/images/avatar/4.png",
+        img_condition: true,
+        content: "菊黄蟹正肥，品尝秋之味。徐志摩把,“看初花的荻芦”和“到楼外楼吃蟹”,并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，",
+        view_num: "122",
+        collect_num: "96"
+      },
+      {
+        date: "Sep 18 2016",
+        title: "正是虾肥蟹壮时",
+        post_img: "/images/post/xiaolong.jpg",
+        author_img: "/images/avatar/1.png",
+        img_condition: true,
+        content: "菊黄蟹正肥，品尝秋之味。徐志摩把,“看初花的荻芦”和“到楼外楼吃蟹”,并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，",
+        view_num: "122",
+        collect_num: "96"
+      },
+      {
+        date: "Sep 18 2016",
+        title: "正是虾肥蟹壮时",
+        post_img: "/images/post/sls.JPG",
+        author_img: "/images/avatar/5.png",
+        img_condition: true,
+        content: "菊黄蟹正肥，品尝秋之味。徐志摩把,“看初花的荻芦”和“到楼外楼吃蟹”,并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，",
+        view_num: "122",
+        collect_num: "96"
+      }];
+    this.setData({posts_key:posts_content})
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log('onready')
+    // console.log('onready')
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('onshow')
+    // console.log('onshow')
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log('onhide')
+    // console.log('onhide')
   },
 
   /**

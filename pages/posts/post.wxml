@@ -10,34 +10,21 @@
       <image src="/images/iqiyi.png"></image>
     </swiper-item>
   </swiper>
-  <view class='post-container'>
-    <view class='post-author-date'>
-      <image wx:if="{{img_condition}}" class='post-author' src="{{img.author_img}}"></image>
-      <text class='post-date'>{{date}}</text>
+  <block wx:for="{{posts_key}}" wx:for-item="item" wx:key="unique">
+    <view class='post-container'>
+      <view class='post-author-date'>
+        <image class='post-author' src="{{item.author_img}}"></image>
+        <text class='post-date'>{{item.date}}</text>
+      </view>
+      <text class='post-title'>{{item.title}}</text>
+      <image class='post-image' src="{{item.post_img}}"></image>
+      <text class='post-content'>{{item.content}}</text>
+      <view class='post-like'>
+        <image class='post-like-image' src="../../images/icon/chat.png"></image>
+        <text class='post-like-font'>{{item.collect_num}}</text>
+        <image class='post-like-image' src="../../images/icon/view.png"></image>
+        <text class='post-like-font'>{{item.view_num}}</text>
+      </view>
     </view>
-    <text class='post-title'>{{title}}</text>
-    <image class='post-image' src="{{img.post_img}}"></image>
-    <text class='post-content'>{{content}}</text>
-    <view class='post-like'>
-      <image class='post-like-image' src="../../images/icon/chat.png"></image>
-      <text class='post-like-font'>{{collect_num}}</text>
-      <image class='post-like-image' src="../../images/icon/view.png"></image>
-      <text class='post-like-font'>{{view_num}}</text>
-    </view>
-  </view>
-  <view class='post-container'>
-    <view class='post-author-date'>
-      <image class='post-author' src="/images/avatar/2.png"></image>
-      <text class='post-date'>Now 25 2016</text>
-    </view>
-    <text class='post-title'>比利-林恩的中场故事</text>
-    <image class='post-image' src="/images/post/bl.png"></image>
-    <text class='post-content'>言归正传,比利又是李安的一部正片，全程无尿点，故事不紧张，却紧凑有节奏，给8.2分。</text>
-    <view class='post-like'>
-      <image class='post-like-image' src="../../images/icon/chat.png"></image>
-      <text class='post-like-font'>96</text>
-      <image class='post-like-image' src="../../images/icon/view.png"></image>
-      <text class='post-like-font'>112</text>
-    </view>
-  </view>
+  </block>
 </view>
