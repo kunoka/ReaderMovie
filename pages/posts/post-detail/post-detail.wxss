@@ -94,5 +94,4 @@
   margin-right: 30rpx;
   line-height: 44rpx;
   letter-spacing: 2px;
-  border: 1px solid red;
 }
