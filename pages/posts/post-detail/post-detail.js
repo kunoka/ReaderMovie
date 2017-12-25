@@ -1,6 +1,8 @@
 var postsData = require('../../../data/posts-data.js')
 Page({
-  data: {},
+  data: {
+    isMusicPlaying: false
+  },
   onLoad: function (option) {
     var postId = option.id;
     this.data.currentPostId = postId;
@@ -11,13 +13,6 @@ Page({
     this.setData(
       {postData: postData}
     )
-
-    // var postsCollectd = {
-    //   1: "true",
-    //   2: "false",
-    //   3: "true",
-    //
-    // }
 
     var postsCollected = wx.getStorageSync('posts_collected');
     if (postsCollected) {
@@ -34,6 +29,20 @@ Page({
     }
   },
   onCollectionTap: function () {
+    this.getPostsCollectedAsy();
+  },
+  getPostsCollectedAsy: function () {
+    var that = this;
+    wx.getStorage({
+      key: 'posts_collected',
+      success: function(res) {
+        var postsCollected = res.data;
+        var postCollected = postsCollected[that.data.currentPostId];
+        that.showToast(postsCollected, postCollected)
+      }
+    });
+  },
+  getPostsCollectedSyc: function () {
     var postsCollected = wx.getStorageSync('posts_collected');
     var postCollected = postsCollected[this.data.currentPostId];
     this.showToast(postsCollected, postCollected)
@@ -58,6 +67,27 @@ Page({
         console.log(res.errMsg)
       }
     });
+  },
+  onMusicTap: function () {
+    var isMusicPlaying = this.data.isMusicPlaying;
+    if(isMusicPlaying) {
+      console.log('I am stoping music');
+      wx.pauseBackgroundAudio();
+      this.setData({
+        isMusicPlaying: false
+      });
+    }else{
+      console.log('I am playing music');
+      var postData = postsData.postList[this.data.currentPostId];
+      wx.playBackgroundAudio({
+        dataUrl: postData.music.url,
+        title: postData.music.title,
+        coverImgUrl: postData.music.coverImg
+      });
+      this.setData({
+        isMusicPlaying: true
+      });
+    }
   },
   showModal: function (postsCollected, postCollected) {
     var that = this;
