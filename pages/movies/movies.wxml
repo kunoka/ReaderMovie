@@ -1,4 +1,4 @@
-<import src="/pages/movies/movie-list/movie-list.wxml" />
+<import src="/pages/movies/movie-list/movie-list-template.wxml" />
 <div>
     <template is="movieListTemplate" />
     <template is="movieListTemplate" />
