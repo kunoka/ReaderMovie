@@ -1,3 +1,4 @@
+var app = getApp();
 Page({
 
   /**
@@ -12,11 +13,34 @@ Page({
    */
   onLoad: function (options) {
     
+    var inTheatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters";
+    var comingSoonUrl = app.globalData.doubanBase  + "/v2/movie/coming_soon";
+    var top250Url = app.globalData.doubanBase + "/v2/movie/top250";
+   
+    this.getMovieListData(inTheatersUrl);
+    this.getMovieListData(top250Url);
+    this.getMovieListData(top250Url);
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
+  getMovieListData: function(url){
+    wx.request({
+      url: url,
+      method: 'GET',
+      header: {
+        'Content-Type':'xml'
+      },
+      success: function(res){
+        console.log('success')
+        console.log(res);
+      },
+      fail: function(res){
+        console.log('fail')
+      }
+    })
+  },
   onReady: function () {
     
   },
