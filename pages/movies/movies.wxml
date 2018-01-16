@@ -1,8 +1,8 @@
 <import src="/pages/movies/movie-list/movie-list-template.wxml" />
 <view class="container">
   <view class="movies-template">
-    <template is="movieListTemplate" />
-    <template is="movieListTemplate" />
-    <template is="movieListTemplate" />
+    <template is="movieListTemplate" data="{{movies}}"/>
+    <!-- <template is="movieListTemplate" />
+    <template is="movieListTemplate" /> -->
   </view>
 </view>
