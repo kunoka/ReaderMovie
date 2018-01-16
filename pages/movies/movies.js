@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    inTheaters: {},
+    comingSoon: {},
+    top250: {}
   },
 
   /**
@@ -17,15 +19,15 @@ Page({
     var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon";
     var top250Url = app.globalData.doubanBase + "/v2/movie/top250";
 
-    this.getMovieListData(inTheatersUrl);
-    // this.getMovieListData(top250Url);
-    // this.getMovieListData(top250Url);
+    this.getMovieListData(inTheatersUrl, "inTheaters");
+    this.getMovieListData(comingSoonUrl, "comingSoon");
+    this.getMovieListData(top250Url, "top250");
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  getMovieListData: function (url) {
+  getMovieListData: function (url, type) {
     var that = this;
     wx.request({
       url: url,
@@ -36,14 +38,14 @@ Page({
       success: function (res) {
         // console.log('success');
         // console.log(res);
-        that.getMovieData(res.data.subjects);
+        that.getMovieData(res.data.subjects, type);
       },
       fail: function (res) {
         console.log('fail')
       }
     })
   },
-  getMovieData: function (subjects) {
+  getMovieData: function (subjects, type) {
     console.log(subjects)
     var movies = [];
     for (var i = 0; i < subjects.length; i++) {
@@ -57,11 +59,14 @@ Page({
       console.log(temp)
       movies.push(temp)
     }
-   
-  
-    this.setData({
+    var readyData = {};
+    readyData[type] = {
       movies: movies
-    })
+    };
+    this.setData(readyData);
+    // this.setData({
+    //   type: {movies: movies}
+    // })
   },
   onReady: function () {
 
