@@ -21,15 +21,15 @@ Page({
     var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon";
     var top250Url = app.globalData.doubanBase + "/v2/movie/top250";
 
-    this.getMovieListData(inTheatersUrl, "inTheaters");
-    this.getMovieListData(comingSoonUrl, "comingSoon");
-    this.getMovieListData(top250Url, "top250");
+    this.getMovieListData(inTheatersUrl, "inTheaters", "正在热映");
+    this.getMovieListData(comingSoonUrl, "comingSoon", "即将上映");
+    this.getMovieListData(top250Url, "top250", "豆瓣Top250");
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  getMovieListData: function (url, type) {
+  getMovieListData: function (url, type, categoryTitle) {
     var that = this;
     wx.request({
       url: url,
@@ -40,14 +40,14 @@ Page({
       success: function (res) {
         // console.log('success');
         // console.log(res);
-        that.getMovieData(res.data.subjects, type);
+        that.getMovieData(res.data.subjects, type, categoryTitle);
       },
       fail: function (res) {
         console.log('fail')
       }
     })
   },
-  getMovieData: function (subjects, type) {
+  getMovieData: function (subjects, type, categoryTitle) {
     console.log(subjects)
     var movies = [];
     for (var i = 0; i < subjects.length; i++) {
@@ -64,6 +64,7 @@ Page({
     }
     var readyData = {};
     readyData[type] = {
+      categoryTitle: categoryTitle,
       movies: movies
     };
     this.setData(readyData);
