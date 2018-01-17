@@ -1,4 +1,6 @@
 var app = getApp();
+var utils = require('../../utils/utils');
+
 Page({
 
   /**
@@ -51,10 +53,11 @@ Page({
     for (var i = 0; i < subjects.length; i++) {
       var movie = subjects[i];
       var temp = {
-        title: movie.title.length >=6? movie.title.substr(0,6)+'...' : movie.title,
-        coverageUrl: movie.images.large.replace('img7','img3'),
+        title: movie.title.length >= 6 ? movie.title.substr(0, 6) + '...' : movie.title,
+        coverageUrl: movie.images.large.replace('img7', 'img3'),
         average: movie.rating.average,
-        movieId: movie.id
+        movieId: movie.id,
+        stars: utils.convertStarArray(movie.rating.stars)
       }
       console.log(temp)
       movies.push(temp)
@@ -64,9 +67,6 @@ Page({
       movies: movies
     };
     this.setData(readyData);
-    // this.setData({
-    //   type: {movies: movies}
-    // })
   },
   onReady: function () {
 

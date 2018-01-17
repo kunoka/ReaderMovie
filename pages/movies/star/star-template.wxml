@@ -1,12 +1,17 @@
 <template name="starsTemplate">
-    <view class="stars-container">
-        <view class="stars">
-            <image src="/images/icon/star.png"></image>
-            <image src="/images/icon/star.png"></image>
-            <image src="/images/icon/star.png"></image>
-            <image src="/images/icon/star.png"></image>
-            <image src="/images/icon/star.png"></image>
-        </view>
-        <text class="star-score">{{average}}</text>
-    </view>
+  <view class="stars-container">
+    <block wx:if="{{stars[0]!='-'}}">
+      <view class="stars">
+        <block wx:for="{{stars}}" wx:for-item="i" wx:key="unique" wx:for-index="idx">
+          <image wx:if="{{i==1}}" src="/images/icon/star.png"></image>
+          <image wx:elif="{{i==0.5}}" src="/images/icon/half-star.png"></image>
+          <image wx:else src="/images/icon/none-star.png"></image>
+        </block>
+      </view>
+      <text class="star-score">{{score}} </text>
+    </block>
+    <block wx:else class="stars">
+      <text class="star-score">暂无评分</text>
+    </block>
+  </view>
 </template>

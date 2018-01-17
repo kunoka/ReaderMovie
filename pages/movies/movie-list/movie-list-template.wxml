@@ -12,10 +12,7 @@
       <view class='movies-container'>
         <block wx:for="{{movies}}" wx:for-item="movie" wx:key="unique" wx:for-index="indx">
           <template is="movieTemplate" data="{{...movie}}" />
-          <!-- <template is="movieTemplate" />
-        <template is="movieTemplate" /> -->
         </block>
-
       </view>
     </view>
   </view>
