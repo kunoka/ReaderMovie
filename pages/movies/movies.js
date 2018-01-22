@@ -35,11 +35,11 @@ Page({
       url: url,
       method: 'GET',
       header: {
-        'Content-Type': 'xml'
+        'Content-Type': ''
       },
       success: function (res) {
-        // console.log('success');
-        // console.log(res);
+        console.log('success');
+        console.log(res);
         that.getMovieData(res.data.subjects, type, categoryTitle);
       },
       fail: function (res) {
@@ -48,8 +48,12 @@ Page({
     })
   },
   getMovieData: function (subjects, type, categoryTitle) {
+    if (typeof subjects === 'undefined'){
+      return;
+    }
     console.log(subjects)
     var movies = [];
+
     for (var i = 0; i < subjects.length; i++) {
       var movie = subjects[i];
       var temp = {
@@ -68,6 +72,14 @@ Page({
       movies: movies
     };
     this.setData(readyData);
+  },
+  onMoreTap: function (event) {
+    console.log(event)
+    var category = event.currentTarget.dataset.category;
+    console.log('category1', category)
+    wx.navigateTo({
+      url: 'more-movie/more-movie?category=' + category
+    })
   },
   onReady: function () {
 
