@@ -1,7 +1,7 @@
 function convertStarArray(marks) {
-  if(marks === '00') {
+  if (marks === '00') {
     return ['-']
-  }else{
+  } else {
     var num = marks.substr(0, 1);
     var halfStar = marks.substr(1, 1) === '5' ? true : false;
     var arr = [];
@@ -21,6 +21,24 @@ function convertStarArray(marks) {
   }
 }
 
+function http(url, callBack) {
+  wx.request({
+    url: url,
+    method: 'GET',
+    header: {
+      'Content-Type': ''
+    },
+    success: function (res) {
+      callBack(url);
+    },
+    fail: function (error) {
+      callBack(url);
+      console.log(error)
+    }
+  })
+}
+
 module.exports = {
-  convertStarArray: convertStarArray
+  convertStarArray: convertStarArray,
+  http: http
 }

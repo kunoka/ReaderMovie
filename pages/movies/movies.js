@@ -38,20 +38,17 @@ Page({
         'Content-Type': ''
       },
       success: function (res) {
-        console.log('success');
-        console.log(res);
-        that.getMovieData(res.data.subjects, type, categoryTitle);
+        that.processDoubanData(res.data.subjects, type, categoryTitle);
       },
-      fail: function (res) {
-        console.log('fail')
+      fail: function (error) {
+        console.log(error)
       }
     })
   },
-  getMovieData: function (subjects, type, categoryTitle) {
+  processDoubanData: function (subjects, type, categoryTitle) {
     if (typeof subjects === 'undefined'){
       return;
     }
-    console.log(subjects)
     var movies = [];
 
     for (var i = 0; i < subjects.length; i++) {
@@ -73,6 +70,7 @@ Page({
     };
     this.setData(readyData);
   },
+
   onMoreTap: function (event) {
     console.log(event)
     var category = event.currentTarget.dataset.category;
