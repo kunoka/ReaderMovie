@@ -37,9 +37,6 @@ Page({
     this.data.requestUrl = dataUrl;
     // utils.http(dataUrl, this.processDoubanData);
   },
-  onScrollLower: function () {
-    console.log('onScrollLower')
-  },
   processGugujiankongData: function (res) {
     var res = res.data;
     console.log(res)
@@ -61,6 +58,8 @@ Page({
       this.setData({
         movies: movies
       });
+      wx.hideNavigationBarLoading()
+
     }
   },
   processDoubanData: function (moviesDouban) {
@@ -97,7 +96,8 @@ Page({
     })
   },
   onScrollLower: function(e) {
-    console.log('onScrollLower',e)
+    console.log('onScrollLower',e);
+    wx.showNavigationBarLoading();
     var nextUrl = this.data.requestUrl;
     nextUrl = nextUrl.replace('20','');
     this.data.totalCount += 20;
@@ -129,7 +129,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var refreshUrl = this.data.requestUrl;
+    refreshUrl = refreshUrl.replace('20','');
+    this.data.totalCount += 20;
+    refreshUrl = refreshUrl + this.data.totalCount;
+    utils.http(refreshUrl, this.processGugujiankongData);
+    wx.showNavigationBarLoading();
   },
 
   /**
