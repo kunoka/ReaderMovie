@@ -17,7 +17,7 @@
   font-size: 24rpx;
 }
 .more{
-   float: right; 
+   float: right;
 }
 .more-text{
   /* vertical-align: middle; */
@@ -34,7 +34,7 @@
   flex-direction: row;
 }
 .inner-container{
-  margin: 0 auto 20rpx;
+  /* margin: 0 auto 20rpx; */
 }
 /* movie-template class */
 .movie-container {

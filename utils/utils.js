@@ -29,16 +29,22 @@ function http(url, callBack) {
       'Content-Type': ''
     },
     success: function (res) {
-      callBack(url);
+      callBack(res);
     },
     fail: function (error) {
-      callBack(url);
-      console.log(error)
+      callBack(error);
     }
   })
 }
 
+function GetRandomNum(Min,Max)
+{
+  var Range = Max - Min;
+  var Rand = Math.random();
+  return(Min + Math.round(Rand * Range));
+}
 module.exports = {
   convertStarArray: convertStarArray,
-  http: http
+  http: http,
+  GetRandomNum: GetRandomNum
 }

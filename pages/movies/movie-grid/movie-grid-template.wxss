@@ -1,10 +1,11 @@
-@import "../movie/movie-template.wxss";
+@import "../movie-list/movie-list-template.wxss";
 
-.signle-view-container{
-    float:left;
+.single-view-container{
     margin-bottom: 40rpx;
 }
 
 .grid-container {
+    display:flex;
+    flex-wrap:wrap;
     margin: 40rpx 0 40rpx 6rpx;
 }

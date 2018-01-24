@@ -1,13 +1,13 @@
 // pages/movies/more-movie/more-movie.js
 var app = getApp();
-var util = require('../../../utils/utils.js');
+var utils = require('../../../utils/utils.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    movies: {},
+    movies: [],
     navigateTitle: "",
   },
 
@@ -16,22 +16,52 @@ Page({
    */
   onLoad: function (options) {
     var category = options.category;
+    console.log('category', category);
     this.data.navigateTitle = category;
-    var dataUrl = "";
+    var dataUrl;
     switch (category) {
       case "正在热映":
-        dataUrl = app.globalData.doubanBase + "/v2/movie/in_theaters";
+        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=top&count=9";
         break;
       case "即将上映":
-        dataUrl = app.globalData.doubanBase + "/v2/movie/coming_soon";
+        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guonei&count=9";
         break;
       case "豆瓣Top250":
-        dataUrl = app.globalData.doubanBase + "/v2/movie/top250";
+        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guoji&count=9";
         break;
     }
-    util.http(dataUrl, this.processDoubanData);
+    utils.http(dataUrl, this.processGugujiankongData);
+    // utils.http(dataUrl, this.processDoubanData);
   },
 
+  onScrollLower: function () {
+    console.log('onScrollLower')
+  },
+  processGugujiankongData: function (res) {
+    var res = res.data;
+    console.log(res)
+    var movies = [];
+    var starArr = ['10', '15', '20', '25', '30', '35', '40', '45', '50'];
+    for (var idx in res) {
+      var movie = res[idx];
+      // console.log(movie)
+      var title = movie.title.length >= 6 ? movie.title.substr(0, 6) + '...' : movie.title
+      var temp = {
+        title: title,
+        coverageUrl: movie.thumbnail_pic_s,
+        average: utils.GetRandomNum(60, 100),
+        movieId: movie.Id.Pid,
+        stars: utils.convertStarArray(starArr[utils.GetRandomNum(1, 8)])
+      }
+      console.log('temp');
+      console.log(temp);
+      movies.push(temp);
+
+      this.setData({
+        movies: movies
+      });
+    }
+  },
   processDoubanData: function (moviesDouban) {
     if (typeof moviesDouban === 'undefined') {
       return;

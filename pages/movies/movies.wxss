@@ -6,3 +6,7 @@
 .movies-template {
   /* margin-bottom: 20rpx; */
 }
+
+.more{
+   float: right;
+}

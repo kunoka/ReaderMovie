@@ -16,12 +16,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    /*  douban api 返回403 先注释掉 使用 gugujiankong API
     var inTheatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters?start=0&count=3";
     var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon";
     var top250Url = app.globalData.doubanBase + "/v2/movie/top250";
 
     this.getMovieListData(inTheatersUrl, "inTheaters", "正在热映");
+    this.getMovieListData(comingSoonUrl, "comingSoon", "即将上映");
+    this.getMovieListData(top250Url, "top250", "豆瓣Top250");
+    */
+
+    var inTheatrsUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=top&count=13";
+    var comingSoonUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guonei&count=3";
+    var top250Url = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guoji&count=3";
+    this.getMovieListData(inTheatrsUrl, "inTheaters", "正在热映");
     this.getMovieListData(comingSoonUrl, "comingSoon", "即将上映");
     this.getMovieListData(top250Url, "top250", "豆瓣Top250");
   },
@@ -38,15 +46,42 @@ Page({
         'Content-Type': ''
       },
       success: function (res) {
-        that.processDoubanData(res.data.subjects, type, categoryTitle);
+        console.log('===res===');
+        console.log(res);
+        // that.processDoubanData(res.data.subjects, type, categoryTitle);
+        that.processGugujiankokngData(res.data, type, categoryTitle);
       },
       fail: function (error) {
         console.log(error)
       }
     })
   },
+  processGugujiankokngData: function (res, type, categoryTitle) {
+    var movies = [];
+    var starArr = ['10', '15', '20', '25', '30', '35', '40', '45', '50'];
+    for (var idx in res) {
+      var movie = res[idx];
+      // console.log(movie)
+      var title = movie.title.length >= 6 ? movie.title.substr(0, 6) + '...' : movie.title
+      var temp = {
+        title: title,
+        coverageUrl: movie.thumbnail_pic_s,
+        average: utils.GetRandomNum(60, 100),
+        movieId: movie.Id.Pid,
+        stars: utils.convertStarArray(starArr[utils.GetRandomNum(1, 8)])
+      }
+      // console.log(temp)
+      movies.push(temp);
+      var readyData = {};
+      readyData[type] = {
+        categoryTitle: categoryTitle,
+        movies: movies
+      };
+      this.setData(readyData);
+    }
+  },
   processDoubanData: function (subjects, type, categoryTitle) {
-    if (typeof subjects === 'undefined'){
+    if (typeof subjects === 'undefined') {
       return;
     }
     var movies = [];
