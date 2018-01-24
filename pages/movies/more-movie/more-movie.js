@@ -1,6 +1,7 @@
 // pages/movies/more-movie/more-movie.js
 var app = getApp();
 var utils = require('../../../utils/utils.js');
+var order = ['red', 'yellow', 'blue', 'green', 'red']
 Page({
 
   /**
@@ -9,6 +10,8 @@ Page({
   data: {
     movies: [],
     navigateTitle: "",
+    requestUrl: "",
+    totalCount: 0
   },
 
   /**
@@ -21,19 +24,19 @@ Page({
     var dataUrl;
     switch (category) {
       case "正在热映":
-        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=top&count=9";
+        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=top&count=20";
         break;
       case "即将上映":
-        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guonei&count=9";
+        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guonei&count=20";
         break;
       case "豆瓣Top250":
-        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guoji&count=9";
+        dataUrl = app.globalData.gugujiankongBase + "Handler.ashx?action=getnews&type=guoji&count=20";
         break;
     }
     utils.http(dataUrl, this.processGugujiankongData);
+    this.data.requestUrl = dataUrl;
     // utils.http(dataUrl, this.processDoubanData);
   },
-
   onScrollLower: function () {
     console.log('onScrollLower')
   },
@@ -53,8 +56,6 @@ Page({
         movieId: movie.Id.Pid,
         stars: utils.convertStarArray(starArr[utils.GetRandomNum(1, 8)])
       }
-      console.log('temp');
-      console.log(temp);
       movies.push(temp);
 
       this.setData({
@@ -95,7 +96,14 @@ Page({
       title: this.data.navigateTitle
     })
   },
-
+  onScrollLower: function(e) {
+    console.log('onScrollLower',e)
+    var nextUrl = this.data.requestUrl;
+    nextUrl = nextUrl.replace('20','');
+    this.data.totalCount += 20;
+    nextUrl = nextUrl + this.data.totalCount;
+    utils.http(nextUrl, this.processGugujiankongData);
+  },
   /**
    * 生命周期函数--监听页面显示
    */
