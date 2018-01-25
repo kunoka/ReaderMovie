@@ -9,7 +9,9 @@ Page({
   data: {
     inTheaters: {},
     comingSoon: {},
-    top250: {}
+    top250: {},
+    containerShow: true,
+    searchPanelShow: false
   },
 
   /**
@@ -158,5 +160,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onBindFocus: function (event) {
+    this.setData({
+      containerShow: false,
+      searchPanelShow: true
+    })
+  },
+  onBindChange: function () {
+    console.log('onBindChange');
+  },
+  onCancelImgTap: function (event) {
+    this.setData({
+      containerShow: true,
+      searchPanelShow: false
+
+    })
   }
 })
